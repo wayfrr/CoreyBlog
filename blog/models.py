@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class Post(models.Model):
 	title = models.CharField(max_length=100)
@@ -11,4 +12,8 @@ class Post(models.Model):
 	def __str__(self) :
 		# self as an argument
 		# now we can return how this has to be printed out 
-		return self.title 
+		return self.title
+
+	def get_absolute_url(self):
+		return reverse('post-detail', kwargs={'pk': self.pk}) 
+
